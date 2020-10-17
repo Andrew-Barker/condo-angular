@@ -60,7 +60,7 @@ export function getHighlightLanguages() {
       : [],
     AppRoutingModule,
     InlineSVGModule.forRoot(),
-    NgbModule,
+    NgbModule
   ],
   providers: [
     {

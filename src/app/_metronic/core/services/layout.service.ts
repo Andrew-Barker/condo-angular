@@ -40,6 +40,7 @@ export class LayoutService {
       LAYOUT_CONFIG_LOCAL_STORAGE_KEY
     );
     if (configFromLocalStorage) {
+      console.log('get layout from local storage')
       try {
         this.layoutConfigSubject.next(JSON.parse(configFromLocalStorage));
         return;
@@ -48,6 +49,7 @@ export class LayoutService {
         console.error('config parse from local storage', error);
       }
     }
+    console.log('get layout from default layout config')
     this.layoutConfigSubject.next(DefaultLayoutConfig);
   }
 

@@ -69,7 +69,7 @@ export const DefaultLayoutConfig = {
     "self": {
       "display": true,
       "width": "fluid",
-      "theme": "light",
+      "theme": "dark",
       "fixed": {
         "desktop": true,
         "mobile": true
@@ -169,7 +169,7 @@ export const DefaultLayoutConfig = {
       }
     },
     "quickActions": {
-      "display": true,
+      "display": false,
       "layout": "dropdown",
       "dropdown": {
         "style": "dark"
@@ -189,10 +189,10 @@ export const DefaultLayoutConfig = {
       }
     },
     "languages": {
-      "display": true
+      "display": false
     },
     "cart": {
-      "display": true,
+      "display": false,
       "layout": "dropdown",
       "offcanvas": {
         "direction": "right"
@@ -202,10 +202,10 @@ export const DefaultLayoutConfig = {
       }
     },
     "chat": {
-      "display": true
+      "display": false
     },
     "quickPanel": {
-      "display": true,
+      "display": false,
       "offcanvas": {
         "direction": "right"
       }

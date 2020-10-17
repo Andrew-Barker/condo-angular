@@ -82,7 +82,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     this.headerSelfTheme = this.layout.getProp('header.self.theme') || '';
     this.headerLogo = this.getLogoURL();
     this.headerMenuCSSClasses = this.layout.getStringCSSClasses('header_menu');
-    console.log('headermenuClass', this.headerMenuCSSClasses);
     console.log('layout', this.layout);
     this.headerMenuHTMLAttributes = this.layout.getHTMLAttributes(
       'header_menu'

@@ -35,7 +35,7 @@ export class TopbarComponent implements OnInit, AfterViewInit {
 
   constructor(private layout: LayoutService, private auth: AuthService) {
     this.user$ = this.auth.currentUserSubject.asObservable();
-    console.log('current user', this.user$);
+    // console.log('current user', this.user$);
   }
 
   ngOnInit(): void {

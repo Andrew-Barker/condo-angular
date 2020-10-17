@@ -1,4 +1,16 @@
 <div class="row">
+  <div class="col-lg-12 col-xxl-8 order-1 order-xxl-2">
+    <div class="card card-custom card-stretch gutter-b">
+      <full-calendar #calendar style="padding: 20px;" [options]="calendarOptions"></full-calendar>
+      <div class="row">
+        <div class="col-lg-4 offset-lg-3 offset-md-3 offset-sm-1 col-sm-4 col-md-4"><div class='box approved'></div> = Approved</div>
+      <div class="col-lg-4 col-sm-4 col-md-4"><div class='box pending'></div> = Pending</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
   <div class="col-lg-6 col-xxl-4">
     <app-mixed-widget1></app-mixed-widget1>
   </div>

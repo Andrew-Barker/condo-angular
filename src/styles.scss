@@ -82,3 +82,22 @@ $beachy: 'beachy', Poppins, Helvetica, "sans-serif";
 .cursor-pointer {
   cursor: pointer;
 }
+
+
+.box {
+  float: left;
+  height: 20px;
+  width: 20px;
+  margin-bottom: 15px;
+  margin-right: 6px;
+  border: 1px solid black;
+  clear: both;
+}
+
+.pending {
+  background-color: gold;
+}
+
+.approved {
+  background-color: #3699FF ;
+}
