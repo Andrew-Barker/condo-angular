@@ -75,7 +75,7 @@ export const DefaultLayoutConfig = {
     self: {
       display: true,
       width: 'fluid', // fixed|fluid,
-      theme: 'light', // light|dark
+      theme: 'dark', // light|dark
       fixed: {
         desktop: true,
         mobile: true,
@@ -84,7 +84,7 @@ export const DefaultLayoutConfig = {
 
     menu: {
       self: {
-        display: true,
+        display: false,
         layout: 'default', // tab/default,
         rootArrow: false,
         iconStyle: 'duotone', // duotone, line, bold, solid
@@ -94,7 +94,7 @@ export const DefaultLayoutConfig = {
         arrow: true,
         toggle: 'click',
         submenu: {
-          theme: 'light',
+          theme: 'dark',
           arrow: true,
         },
       },
@@ -221,12 +221,12 @@ export const DefaultLayoutConfig = {
 
     // Languages
     languages: {
-      display: true,
+      display: false,
     },
 
     // Cart
     cart: {
-      display: true,
+      display: false,
       layout: 'dropdown', // offcanvas, dropdown,
       offcanvas: {
         direction: 'right',
@@ -243,7 +243,7 @@ export const DefaultLayoutConfig = {
 
     // Quick Panel
     quickPanel: {
-      display: true,
+      display: false,
       offcanvas: {
         direction: 'right',
       },

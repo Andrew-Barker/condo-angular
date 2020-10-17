@@ -25,14 +25,14 @@
       <div class="d-flex align-items-baseline flex-wrap mr-5">
         <!--begin::Page Title-->
         <ng-container *ngIf="title$ | async as _title">
-          <h5 class="text-dark font-weight-bold my-1 mr-5">
+          <h1 class="text-dark font-weight-bold my-1 mr-5 beachy" style="font-size: 3.5rem !important;">
             {{ _title }}
             <ng-container *ngIf="subheaderDisplayDesc">
               <ng-container *ngIf="description$ | async as _description">
                 <small>{{ _description }}</small>
               </ng-container>
             </ng-container>
-          </h5>
+          </h1>
         </ng-container>
         <!--end::Page Title-->
 

@@ -82,21 +82,23 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     this.headerSelfTheme = this.layout.getProp('header.self.theme') || '';
     this.headerLogo = this.getLogoURL();
     this.headerMenuCSSClasses = this.layout.getStringCSSClasses('header_menu');
+    console.log('headermenuClass', this.headerMenuCSSClasses);
+    console.log('layout', this.layout);
     this.headerMenuHTMLAttributes = this.layout.getHTMLAttributes(
       'header_menu'
     );
   }
 
   private getLogoURL(): string {
-    let result = 'logo-light.png';
+    let result = 'lbk_logo';
 
-    if (this.headerSelfTheme && this.headerSelfTheme === 'light') {
-      result = 'logo-dark.png';
-    }
+    // if (this.headerSelfTheme && this.headerSelfTheme === 'light') {
+    //   result = 'logo-dark.png';
+    // }
 
-    if (this.headerSelfTheme && this.headerSelfTheme === 'dark') {
-      result = 'logo-dark.png';
-    }
+    // if (this.headerSelfTheme && this.headerSelfTheme === 'dark') {
+    //   result = 'logo-dark.png';
+    // }
 
     return `./assets/media/logos/${result}`;
   }
