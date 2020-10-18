@@ -19,10 +19,11 @@ export class Dashboard1Component implements OnInit {
 
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
   user$: UserModel;
-  events$: any = [{ title: `Fun In The Sun`, allDay: true, start: '2020-10-12', end: '2020-10-14', backgroundColor: 'gold', textColor: 'black' },
-  { title: 'Vacation!!!', allDay: true, start: '2020-10-23', end: '2020-11-01', backgroundColor: '#3699FF', editable: true }];
+  primaryBlue: string = '#3699FF';
+  events$: any = [{id: '1', title: `Fun In The Sun`, allDay: true, start: '2020-10-12', end: '2020-10-14', backgroundColor: 'gold', textColor: 'black' },
+  {id: '2', title: 'Vacation!!!', allDay: true, start: '2020-10-23', end: '2020-11-01', backgroundColor: this.primaryBlue, editable: true }];
   calendarApi: Calendar;
-  listEvents;
+  pendingStaysList;
   
 
 
@@ -45,8 +46,7 @@ export class Dashboard1Component implements OnInit {
   ngAfterViewInit(): void {
     this.calendarApi = this.calendarComponent.getApi();
     this.events$ = this.calendarApi.getEvents();
-    this.listEvents = [{ title: `Fun In The Sun`, allDay: true, start: '2020-10-12', end: '2020-10-14', backgroundColor: 'gold', textColor: 'black' },
-    { title: 'Vacation!!!', allDay: true, start: '2020-10-23', end: '2020-11-01', backgroundColor: '#3699FF', editable: true }];
+    this.pendingStaysList = this.getPendingStays(this.events$);
   }
 
   handleDateClick(arg) {
@@ -96,10 +96,10 @@ export class Dashboard1Component implements OnInit {
         // info.end.setDate(info.end.getDate() + 1);
         // checkOutDate.setDate(checkOutDate.getDate() - 1);
         console.log('info end', info.end);
-        this.calendarApi.addEvent({ title: `${this.user$.fullname}`, allDay: true, start: info.start, end: info.end, backgroundColor: 'gold', textColor: 'black' });
-        this.listEvents.push({ title: `${this.user$.fullname}`, allDay: true, start: info.start, end: checkOutDate, backgroundColor: 'gold', textColor: 'black' });
+        const eventId = this.events$.length + 1;
+        this.calendarApi.addEvent({id: `${eventId}`, title: `${this.user$.fullname}`, allDay: true, start: info.start, end: info.end, backgroundColor: 'gold', textColor: 'black' });
+        this.pendingStaysList.push({id: `${eventId}`, title: `${this.user$.fullname}`, allDay: true, start: info.start, end: checkOutDate, backgroundColor: 'gold', textColor: 'black' });
         this.changeDetection.detectChanges();
-        console.log('all events', this.listEvents, checkOutDate);
         Swal.fire({
           icon: 'success',
           title: 'Request Submitted',
@@ -121,11 +121,41 @@ export class Dashboard1Component implements OnInit {
     return true;
   }
 
-  getPendingStays() {
-    if(this.listEvents) {
-      return this.listEvents.filter(stay => stay.backgroundColor === 'gold');
+  getPendingStays(events) {
+    if(events) {
+      return events.filter(stay => stay.backgroundColor === 'gold');
     }
     return [];
+  }
+
+  approveRequest(request) {
+    // TODO: http call to update DB that request is approved
+
+
+    //do this after DB call
+    this.calendarApi.getEventById(request.id).setProp('backgroundColor', this.primaryBlue);
+    this.calendarApi.getEventById(request.id).setProp('textColor', 'white');
+    this.pendingStaysList = this.getPendingStays(this.calendarApi.getEvents())
+    this.changeDetection.detectChanges();
+  }
+
+  denyRequest(request, index) {
+
+    Swal.fire({
+      title: `Are you sure you want to deny this request?`,
+      showCancelButton: true,
+      confirmButtonText: `Yes`,
+      cancelButtonText: `No`,
+      width: `50rem`,
+      cancelButtonColor: 'red',
+      confirmButtonColor: '#3699FF',
+      reverseButtons: true,
+    }).then((result) => {
+      if(result.isConfirmed) {
+        this.calendarApi.getEventById(request.id).remove();
+        this.pendingStaysList.splice(index, 1);
+      }
+    })
   }
 
 }

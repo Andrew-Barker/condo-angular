@@ -67,18 +67,19 @@
     <div class="card">
       <div class="card-header">
         <h4 class="card-title">Pending Stays</h4>
-        <p class="card-text">Below is the request of stays that still need your attention.</p>
+        <p class="card-text" *ngIf="pendingStaysList?.length > 0">Below you will find a list requests to stay at the condo that still need your attention.</p>
+        <p class="card-text" *ngIf="pendingStaysList?.length == 0">There currently are no requests that need your attention.</p>
       </div>
       <div class="card-content">
         <div class="card-body">
           <ul class="list-group">
-            <li class="list-group-item" *ngFor="let stay of getPendingStays()">
+            <li class="list-group-item" *ngFor="let stay of pendingStaysList; index as i">
               <span class="float-right">
                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-danger btn-xs" ngbTooltip="Deny Request"
-                ngbTooltipClass="kt-tooltip" placement="top"><i class="fas fa-ban"></i></button>
+                ngbTooltipClass="kt-tooltip" placement="top" (click)="denyRequest(stay, i)"><i class="fas fa-ban"></i></button>
                 <button type="button" class="btn btn-success btn-xs" ngbTooltip="Approve Request"
-                ngbTooltipClass="default-tool" tooltipClass="default-tool" placement="top"><i class="fas fa-thumbs-up"></i></button>
+                 placement="top" (click)="approveRequest(stay)"><i class="fas fa-thumbs-up"></i></button>
               </div>
             </span>{{stay.title}}<br><small>{{stay.start | date: 'shortDate'}} - {{stay.end | date: 'shortDate'}}</small>
             </li>
