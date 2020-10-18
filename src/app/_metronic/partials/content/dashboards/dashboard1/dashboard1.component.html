@@ -14,6 +14,35 @@
   <!-- Area to right of calendar -->
   <div class="col-lg-12 col-xxl-4 order-1 order-xxl-2">
 
+
+    <!-- Start Pending Stays  -->
+  <div class="col-lg-12 col-xxl-12 order-1 order-xxl-2" *ngIf="!user$?.roles.includes(3)">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Pending Stays</h4>
+        <p class="card-text" *ngIf="pendingStaysList?.length > 0">Below you will find a list requests to stay at the condo that still need your attention.</p>
+        <p class="card-text" *ngIf="pendingStaysList?.length == 0">There currently are no requests that need your attention.</p>
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let stay of pendingStaysList; index as i">
+              <span class="float-right">
+                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-danger btn-xs" ngbTooltip="Deny Request"
+                ngbTooltipClass="kt-tooltip" placement="top" (click)="denyRequest(stay, i)"><i class="fas fa-ban"></i></button>
+                <button type="button" class="btn btn-success btn-xs" ngbTooltip="Approve Request"
+                 placement="top" (click)="approveRequest(stay)"><i class="fas fa-thumbs-up"></i></button>
+              </div>
+            </span>{{stay.title}}<br><small>{{stay.start | date: 'shortDate'}} - {{stay.end | date: 'shortDate'}}</small>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
     <!-- Start weather Card -->
   <div class="col-lg-12 col-xxl-12 order-1 order-xxl-2">
     <div class="card overflow-hidden">
@@ -62,37 +91,12 @@
     </div>
   </div>
 
-  <!-- Start Pending Stays  -->
-  <div class="col-lg-12 col-xxl-12 order-1 order-xxl-2">
-    <div class="card">
-      <div class="card-header">
-        <h4 class="card-title">Pending Stays</h4>
-        <p class="card-text" *ngIf="pendingStaysList?.length > 0">Below you will find a list requests to stay at the condo that still need your attention.</p>
-        <p class="card-text" *ngIf="pendingStaysList?.length == 0">There currently are no requests that need your attention.</p>
-      </div>
-      <div class="card-content">
-        <div class="card-body">
-          <ul class="list-group">
-            <li class="list-group-item" *ngFor="let stay of pendingStaysList; index as i">
-              <span class="float-right">
-                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-danger btn-xs" ngbTooltip="Deny Request"
-                ngbTooltipClass="kt-tooltip" placement="top" (click)="denyRequest(stay, i)"><i class="fas fa-ban"></i></button>
-                <button type="button" class="btn btn-success btn-xs" ngbTooltip="Approve Request"
-                 placement="top" (click)="approveRequest(stay)"><i class="fas fa-thumbs-up"></i></button>
-              </div>
-            </span>{{stay.title}}<br><small>{{stay.start | date: 'shortDate'}} - {{stay.end | date: 'shortDate'}}</small>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+  
 
   </div>
 </div>
 
-<div class="row">
+<!-- <div class="row">
   <div class="col-lg-6 col-xxl-4">
     <app-mixed-widget1></app-mixed-widget1>
   </div>
@@ -126,4 +130,4 @@
   <div class="col-lg-8">
     <app-advance-tables-widget4></app-advance-tables-widget4>
   </div>
-</div>
+</div> -->
