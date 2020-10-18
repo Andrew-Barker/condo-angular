@@ -12,7 +12,7 @@ export class DashboardService {
   constructor(private http: HttpClient) { }
 
   getCondoEvents(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/bookingRequests`)
+    return this.http.get<any>(`${this.apiUrl}/bookingRequests`);
   }
 
   addCondoRequest(condoRequest): Observable<any> {
@@ -26,4 +26,8 @@ export class DashboardService {
   removeCondoRequest(id): Observable<any> {
     return this.http.delete(`${this.apiUrl}/bookingRequests/${id}`);
   }
-}
+
+  getWeatherOverview(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/fiveDayWeather`);
+  }
+ }

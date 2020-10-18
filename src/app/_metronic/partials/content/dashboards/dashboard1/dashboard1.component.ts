@@ -24,6 +24,7 @@ export class Dashboard1Component implements OnInit {
   events$: any = [];
   calendarApi: Calendar;
   pendingStaysList;
+  weatherOverview;
   
 
 
@@ -42,7 +43,13 @@ export class Dashboard1Component implements OnInit {
     });
   }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { 
+    this.dashboardService.getWeatherOverview().subscribe(weather => {
+      this.weatherOverview = weather;
+    }, error => {
+      
+    })
+   }
 
   ngAfterViewInit(): void {
     this.calendarApi = this.calendarComponent.getApi();

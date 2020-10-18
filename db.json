@@ -9,5 +9,40 @@
       "backgroundColor": "#3699FF",
       "editable": true
     }
-  ]
+  ],
+  "fiveDayWeather": {
+      "weatherSummary": "rainy",
+      "forecast": [
+          {
+              "day": "Mon",
+              "icon": "fas fa-sun",
+              "high": 78,
+              "low": 65
+          },
+          {
+            "day": "Tue",
+            "icon": "fas fa-cloud-sun",
+            "high": 70,
+            "low": 52
+        },
+        {
+            "day": "Wed",
+            "icon": "fas fa-cloud-sun-rain",
+            "high": 69,
+            "low": 48
+        },
+        {
+            "day": "Thu",
+            "icon": "fas fa-cloud-showers-heavy",
+            "high": 64,
+            "low": 37
+        },
+        {
+            "day": "Fri",
+            "icon": "fas fa-wind",
+            "high": 72,
+            "low": 61
+        }
+      ]
+  }
 }
