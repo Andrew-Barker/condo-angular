@@ -6,6 +6,7 @@ import { WidgetsModule } from '../widgets/widgets.module';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
 import interactionPlugin from '@fullcalendar/interaction';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -14,7 +15,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 
 @NgModule({
   declarations: [Dashboard1Component, DashboardWrapperComponent],
-  imports: [CommonModule, WidgetsModule, FullCalendarModule],
+  imports: [CommonModule, WidgetsModule, FullCalendarModule, NgbModule],
   exports: [DashboardWrapperComponent],
 })
 export class DashboardsModule {}

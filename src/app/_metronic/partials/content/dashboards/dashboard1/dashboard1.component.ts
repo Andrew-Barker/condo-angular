@@ -1,23 +1,29 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular/public_api';
+import { Calendar, CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular/public_api';
 import { LayoutService } from '../../../../core';
 import Swal from 'sweetalert2';
 import { AuthService } from 'src/app/modules/auth/_services/auth.service';
 import { Observable } from 'rxjs';
 import { UserModel } from 'src/app/modules/auth/_models/user.model';
 import { ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard1',
   templateUrl: './dashboard1.component.html',
-  styleUrls: ['./dashboard1.component.scss']
+  styleUrls: ['./dashboard1.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class Dashboard1Component implements OnInit {
 
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
   user$: UserModel;
-  events$ = [{ title: `Fun In The Sun`, allDay: true, start: '2020-10-12', end: '2020-10-14', backgroundColor: 'gold', textColor: 'black' },
+  events$: any = [{ title: `Fun In The Sun`, allDay: true, start: '2020-10-12', end: '2020-10-14', backgroundColor: 'gold', textColor: 'black' },
   { title: 'Vacation!!!', allDay: true, start: '2020-10-23', end: '2020-11-01', backgroundColor: '#3699FF', editable: true }];
+  calendarApi: Calendar;
+  listEvents;
+  
 
 
   calendarOptions: CalendarOptions = {
@@ -28,13 +34,20 @@ export class Dashboard1Component implements OnInit {
     select: this.handleDateSelect.bind(this)
   };
 
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService, private changeDetection: ChangeDetectorRef) {
     this.auth.currentUserSubject.asObservable().subscribe(user => {
       this.user$ = user;
     });
   }
 
   ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    this.calendarApi = this.calendarComponent.getApi();
+    this.events$ = this.calendarApi.getEvents();
+    this.listEvents = [{ title: `Fun In The Sun`, allDay: true, start: '2020-10-12', end: '2020-10-14', backgroundColor: 'gold', textColor: 'black' },
+    { title: 'Vacation!!!', allDay: true, start: '2020-10-23', end: '2020-11-01', backgroundColor: '#3699FF', editable: true }];
+  }
 
   handleDateClick(arg) {
     alert('date click! ' + arg.dateStr)
@@ -53,9 +66,9 @@ export class Dashboard1Component implements OnInit {
     } else {
     
     const checkIn = info.start.toLocaleDateString();
-    let checkOut = info.end;
-    checkOut.setDate(checkOut.getDate() - 1);
-    checkOut = checkOut.toLocaleDateString();
+    let checkOutDate = new Date(info.end);
+    checkOutDate.setDate(checkOutDate.getDate() - 1);
+    let checkOut = checkOutDate.toLocaleDateString();
 
     let html = `<p>Are you sure you would like to submit your request to stay at the condo during the following dates?</p>
     <p><b>${checkIn}</b><span *ngIf="!singleDay"> - <b>${checkOut}</b></span></p>`;
@@ -79,9 +92,14 @@ export class Dashboard1Component implements OnInit {
     }).then((result) => {
       if(result.isConfirmed) {
         //add event to the calendar
-        let calendarApi = this.calendarComponent.getApi();
-        info.end.setDate(info.end.getDate() + 1);
-        calendarApi.addEvent({ title: `${this.user$.fullname}`, allDay: true, start: info.start, end: info.end, backgroundColor: 'gold', textColor: 'black' });
+        
+        // info.end.setDate(info.end.getDate() + 1);
+        // checkOutDate.setDate(checkOutDate.getDate() - 1);
+        console.log('info end', info.end);
+        this.calendarApi.addEvent({ title: `${this.user$.fullname}`, allDay: true, start: info.start, end: info.end, backgroundColor: 'gold', textColor: 'black' });
+        this.listEvents.push({ title: `${this.user$.fullname}`, allDay: true, start: info.start, end: checkOutDate, backgroundColor: 'gold', textColor: 'black' });
+        this.changeDetection.detectChanges();
+        console.log('all events', this.listEvents, checkOutDate);
         Swal.fire({
           icon: 'success',
           title: 'Request Submitted',
@@ -101,6 +119,13 @@ export class Dashboard1Component implements OnInit {
       return false;
     }
     return true;
+  }
+
+  getPendingStays() {
+    if(this.listEvents) {
+      return this.listEvents.filter(stay => stay.backgroundColor === 'gold');
+    }
+    return [];
   }
 
 }

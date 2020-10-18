@@ -217,4 +217,10 @@
       }
     }
   }
-  
+  .default-tool .tooltip-inner {
+    background-color: darkgreen;
+    font-size: 125%;
+  }
+  .default-tool .arrow::before {
+    border-top-color: darkgreen;
+  }

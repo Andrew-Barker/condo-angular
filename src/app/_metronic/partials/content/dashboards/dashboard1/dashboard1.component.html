@@ -1,4 +1,6 @@
 <div class="row">
+
+  <!-- Start Calendar -->
   <div class="col-lg-12 col-xxl-8 order-1 order-xxl-2">
     <div class="card card-custom card-stretch gutter-b">
       <full-calendar #calendar style="padding: 20px;" [options]="calendarOptions"></full-calendar>
@@ -8,7 +10,12 @@
       </div>
     </div>
   </div>
-  <div class="ol-lg-12 col-xxl-4 order-1 order-xxl-2">
+
+  <!-- Area to right of calendar -->
+  <div class="col-lg-12 col-xxl-4 order-1 order-xxl-2">
+
+    <!-- Start weather Card -->
+  <div class="col-lg-12 col-xxl-12 order-1 order-xxl-2">
     <div class="card overflow-hidden">
       <div class="card-content">
         <div class="card-img">
@@ -19,7 +26,7 @@
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="col-2 text-center">
+            <div class="col-2 offset-1 text-center">
               <span class="d-block">Mon</span>
               <i class="fas fa-sun d-block primary font-large-1 my-3"></i>
               <span class="d-block">78&deg;</span>
@@ -49,16 +56,38 @@
               <span class="d-block">72&deg;</span>
               <span class="d-block">46&deg;</span>
             </div>
-            <div class="col-2 text-center">
-              <span class="d-block">Sat</span>
-              <i class="fas fa-bolt d-block primary font-large-1 my-3"></i>
-              <span class="d-block">83&deg;</span>
-              <span class="d-block">68&deg;</span>
-            </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Start Pending Stays  -->
+  <div class="col-lg-12 col-xxl-12 order-1 order-xxl-2">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Pending Stays</h4>
+        <p class="card-text">Below is the request of stays that still need your attention.</p>
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let stay of getPendingStays()">
+              <span class="float-right">
+                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-danger btn-xs" ngbTooltip="Deny Request"
+                ngbTooltipClass="kt-tooltip" placement="top"><i class="fas fa-ban"></i></button>
+                <button type="button" class="btn btn-success btn-xs" ngbTooltip="Approve Request"
+                ngbTooltipClass="default-tool" tooltipClass="default-tool" placement="top"><i class="fas fa-thumbs-up"></i></button>
+              </div>
+            </span>{{stay.title}}<br><small>{{stay.start | date: 'shortDate'}} - {{stay.end | date: 'shortDate'}}</small>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
   </div>
 </div>
 
