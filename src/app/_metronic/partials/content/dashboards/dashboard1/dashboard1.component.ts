@@ -8,6 +8,7 @@ import { UserModel } from 'src/app/modules/auth/_models/user.model';
 import { ViewChild } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
+import { DashboardService } from './dashboard.service';
 
 @Component({
   selector: 'app-dashboard1',
@@ -20,8 +21,7 @@ export class Dashboard1Component implements OnInit {
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
   user$: UserModel;
   primaryBlue: string = '#3699FF';
-  events$: any = [{id: '1', title: `Fun In The Sun`, allDay: true, start: '2020-10-12', end: '2020-10-14', backgroundColor: 'gold', textColor: 'black' },
-  {id: '2', title: 'Vacation!!!', allDay: true, start: '2020-10-23', end: '2020-11-01', backgroundColor: this.primaryBlue, editable: true }];
+  events$: any = [];
   calendarApi: Calendar;
   pendingStaysList;
   
@@ -35,22 +35,29 @@ export class Dashboard1Component implements OnInit {
     select: this.handleDateSelect.bind(this)
   };
 
-  constructor(private auth: AuthService, private changeDetection: ChangeDetectorRef) {
+  constructor(private auth: AuthService, private changeDetection: ChangeDetectorRef,
+    private dashboardService: DashboardService) {
     this.auth.currentUserSubject.asObservable().subscribe(user => {
       this.user$ = user;
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {  }
 
   ngAfterViewInit(): void {
     this.calendarApi = this.calendarComponent.getApi();
-    this.events$ = this.calendarApi.getEvents();
-    this.pendingStaysList = this.getPendingStays(this.events$);
-  }
 
-  handleDateClick(arg) {
-    alert('date click! ' + arg.dateStr)
+    this.dashboardService.getCondoEvents().subscribe(events => {
+      console.log('events from api',events);
+      this.calendarApi.addEventSource(events);
+      this.events$ = this.calendarApi.getEvents();
+      this.pendingStaysList = this.getPendingStays(this.events$);
+      this.changeDetection.detectChanges();
+    }, error => {
+
+    });
+
+
   }
 
   handleDateSelect(info) {
@@ -92,13 +99,13 @@ export class Dashboard1Component implements OnInit {
     }).then((result) => {
       if(result.isConfirmed) {
         //add event to the calendar
-        
-        // info.end.setDate(info.end.getDate() + 1);
-        // checkOutDate.setDate(checkOutDate.getDate() - 1);
-        console.log('info end', info.end);
+
         const eventId = this.events$.length + 1;
-        this.calendarApi.addEvent({id: `${eventId}`, title: `${this.user$.fullname}`, allDay: true, start: info.start, end: info.end, backgroundColor: 'gold', textColor: 'black' });
-        this.pendingStaysList.push({id: `${eventId}`, title: `${this.user$.fullname}`, allDay: true, start: info.start, end: checkOutDate, backgroundColor: 'gold', textColor: 'black' });
+        this.dashboardService.addCondoRequest({title: `${this.user$.fullname}`, allDay: true, start: info.start, end: info.end, backgroundColor: 'gold', textColor: 'black' }).subscribe(request => {
+          console.log('post request success', request);
+
+        this.calendarApi.addEvent(request);
+        this.pendingStaysList.push(request);
         this.changeDetection.detectChanges();
         Swal.fire({
           icon: 'success',
@@ -106,7 +113,14 @@ export class Dashboard1Component implements OnInit {
           text: 'Your request to stay at the condo has been submitted and is pending approval.',
           timer: 2500,
           timerProgressBar: true
+        });
+
+        }, error => {
+
         })
+        
+
+        
       }
     })
   }
@@ -130,17 +144,23 @@ export class Dashboard1Component implements OnInit {
 
   approveRequest(request) {
     // TODO: http call to update DB that request is approved
+    request.setProp('backgroundColor', this.primaryBlue);
+    request.setProp('textColor', 'white');
+    this.dashboardService.updateCondoRequest(request).subscribe(updatedReq => {
+      //do this after DB call
+      this.calendarApi.getEventById(request.id).setProp('backgroundColor', this.primaryBlue);
+      this.calendarApi.getEventById(request.id).setProp('textColor', 'white');
+      this.pendingStaysList = this.getPendingStays(this.calendarApi.getEvents())
+      this.changeDetection.detectChanges();
 
+    }, error => {
 
-    //do this after DB call
-    this.calendarApi.getEventById(request.id).setProp('backgroundColor', this.primaryBlue);
-    this.calendarApi.getEventById(request.id).setProp('textColor', 'white');
-    this.pendingStaysList = this.getPendingStays(this.calendarApi.getEvents())
-    this.changeDetection.detectChanges();
+    })
+    
   }
 
   denyRequest(request, index) {
-
+    console.log('request to delete', request, index)
     Swal.fire({
       title: `Are you sure you want to deny this request?`,
       showCancelButton: true,
@@ -152,8 +172,15 @@ export class Dashboard1Component implements OnInit {
       reverseButtons: true,
     }).then((result) => {
       if(result.isConfirmed) {
-        this.calendarApi.getEventById(request.id).remove();
-        this.pendingStaysList.splice(index, 1);
+
+        this.dashboardService.removeCondoRequest(request.id).subscribe(deleteResponse => {
+          
+          this.calendarApi.getEventById(request.id).remove();
+          this.pendingStaysList.splice(index, 1);
+        }, error => {
+
+        })
+
       }
     })
   }

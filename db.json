@@ -1,0 +1,13 @@
+{
+  "bookingRequests": [
+    {
+      "id": "2",
+      "title": "Vacation!!!",
+      "allDay": true,
+      "start": "2020-10-23",
+      "end": "2020-11-01",
+      "backgroundColor": "#3699FF",
+      "editable": true
+    }
+  ]
+}
