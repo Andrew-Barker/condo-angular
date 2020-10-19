@@ -60,22 +60,31 @@
       "showDetails": false,
       "places": [
         {
-          "name": "McDonalds",
+          "name": "Dry Dock Waterfront Grill",
           "recommender": "Andrew Barker",
           "distance": 2.4,
-          "driveTime": 4
+          "driveTime": 4,
+          "latitude": 27.3352895,
+          "longitude": -82.5851012,
+          "address": "412 Gulf of Mexico Dr, Longboat Key, FL 34228"
         },
         {
-          "name": "Taco Bell",
+          "name": "Longbeach Cafe",
           "recommender": "Andrew Barker",
           "distance": 1.8,
-          "driveTime": 3
+          "driveTime": 3,
+          "latitude": 27.4331093,
+          "longitude": -82.6836137,
+          "address": "6836 Gulf of Mexico Dr, Longboat Key, FL 34228"
         },
         {
-          "name": "Gregg's Seafood",
+          "name": "South Philly Cheesesteaks",
           "recommender": "Andrew Barker",
           "distance": 8,
-          "driveTime": 19
+          "driveTime": 19,
+          "latitude": 27.4366099,
+          "longitude": -82.5965863,
+          "address": "5942 34th St W #115, Bradenton, FL 34210"
         }
       ]
     },
@@ -84,46 +93,31 @@
       "showDetails": false,
       "places": [
         {
-          "name": "Sams Club",
+          "name": "Sam's Club",
           "recommender": "Andrew Barker",
           "distance": 2.4,
-          "driveTime": 4
+          "driveTime": 4,
+          "latitude": 27.4460533,
+          "longitude": -82.5281599,
+          "address": "5300 30th St E, Bradenton, FL 34203"
         },
         {
           "name": "Costco",
           "recommender": "Andrew Barker",
           "distance": 1.8,
-          "driveTime": 3
+          "driveTime": 3,
+          "latitude": 27.234344,
+          "longitude": -82.4913235,
+          "address": "8201 S Tamiami Trail UNIT 501, Sarasota, FL 34238"
         },
         {
           "name": "Publix",
           "recommender": "Andrew Barker",
           "distance": 8,
-          "driveTime": 19
-        }
-      ]
-    },
-    {
-      "category": "Shops",
-      "showDetails": false,
-      "places": [
-        {
-          "name": "Nike",
-          "recommender": "Andrew Barker",
-          "distance": 2.4,
-          "driveTime": 4
-        },
-        {
-          "name": "Apple",
-          "recommender": "Andrew Barker",
-          "distance": 1.8,
-          "driveTime": 3
-        },
-        {
-          "name": "Kay Jewelers",
-          "recommender": "Andrew Barker",
-          "distance": 8,
-          "driveTime": 19
+          "driveTime": 19,
+          "latitude": 27.3674677,
+          "longitude": -82.6244423,
+          "address": "525 Bay Isles Pkwy, Longboat Key, FL 34228"
         }
       ]
     },
@@ -132,22 +126,31 @@
       "showDetails": false,
       "places": [
         {
-          "name": "Aquarium",
+          "name": "Sarasota Jungle Gardens",
           "recommender": "Andrew Barker",
           "distance": 2.4,
-          "driveTime": 4
+          "driveTime": 4,
+          "latitude": 27.3678437,
+          "longitude": -82.555814,
+          "address": "3701 Bay Shore Rd, Sarasota, FL 34234"
         },
         {
-          "name": "Zoo",
+          "name": "The John and Mable Ringling Museum of Art",
           "recommender": "Andrew Barker",
           "distance": 1.8,
-          "driveTime": 3
+          "driveTime": 3,
+          "latitude": 27.3831463,
+          "longitude": -82.559482,
+          "address": "5401 Bay Shore Rd, Sarasota, FL 34243"
         },
         {
-          "name": "City Square",
+          "name": "Mote Marine Laboratory & Aquarium",
           "recommender": "Andrew Barker",
           "distance": 8,
-          "driveTime": 19
+          "driveTime": 19,
+          "latitude": 27.3333248,
+          "longitude": -82.5779979,
+          "address": "1600 Ken Thompson Pkwy, Sarasota, FL 34236"
         }
       ]
     }
