@@ -8,41 +8,148 @@
       "end": "2020-11-01",
       "backgroundColor": "#3699FF",
       "editable": true
+    },
+    {
+      "title": "Andrew Barker",
+      "allDay": true,
+      "start": "2020-10-19T04:00:00.000Z",
+      "end": "2020-10-21T04:00:00.000Z",
+      "backgroundColor": "gold",
+      "textColor": "black",
+      "id": "WQsiGFy"
     }
   ],
   "fiveDayWeather": {
-      "weatherSummary": "rainy",
-      "forecast": [
-          {
-              "day": "Mon",
-              "icon": "fas fa-sun",
-              "high": 78,
-              "low": 65
-          },
-          {
-            "day": "Tue",
-            "icon": "fas fa-cloud-sun",
-            "high": 70,
-            "low": 52
+    "weatherSummary": "sunny",
+    "forecast": [
+      {
+        "day": "Mon",
+        "icon": "fas fa-sun",
+        "high": 78,
+        "low": 65
+      },
+      {
+        "day": "Tue",
+        "icon": "fas fa-cloud-sun",
+        "high": 70,
+        "low": 52
+      },
+      {
+        "day": "Wed",
+        "icon": "fas fa-cloud-sun-rain",
+        "high": 69,
+        "low": 48
+      },
+      {
+        "day": "Thu",
+        "icon": "fas fa-cloud-showers-heavy",
+        "high": 64,
+        "low": 37
+      },
+      {
+        "day": "Fri",
+        "icon": "fas fa-wind",
+        "high": 72,
+        "low": 61
+      }
+    ]
+  },
+  "pointsOfInterest": [
+    {
+      "category": "Restaurants",
+      "showDetails": false,
+      "places": [
+        {
+          "name": "McDonalds",
+          "recommender": "Andrew Barker",
+          "distance": 2.4,
+          "driveTime": 4
         },
         {
-            "day": "Wed",
-            "icon": "fas fa-cloud-sun-rain",
-            "high": 69,
-            "low": 48
+          "name": "Taco Bell",
+          "recommender": "Andrew Barker",
+          "distance": 1.8,
+          "driveTime": 3
         },
         {
-            "day": "Thu",
-            "icon": "fas fa-cloud-showers-heavy",
-            "high": 64,
-            "low": 37
-        },
-        {
-            "day": "Fri",
-            "icon": "fas fa-wind",
-            "high": 72,
-            "low": 61
+          "name": "Gregg's Seafood",
+          "recommender": "Andrew Barker",
+          "distance": 8,
+          "driveTime": 19
         }
       ]
-  }
+    },
+    {
+      "category": "Grocery",
+      "showDetails": false,
+      "places": [
+        {
+          "name": "Sams Club",
+          "recommender": "Andrew Barker",
+          "distance": 2.4,
+          "driveTime": 4
+        },
+        {
+          "name": "Costco",
+          "recommender": "Andrew Barker",
+          "distance": 1.8,
+          "driveTime": 3
+        },
+        {
+          "name": "Publix",
+          "recommender": "Andrew Barker",
+          "distance": 8,
+          "driveTime": 19
+        }
+      ]
+    },
+    {
+      "category": "Shops",
+      "showDetails": false,
+      "places": [
+        {
+          "name": "Nike",
+          "recommender": "Andrew Barker",
+          "distance": 2.4,
+          "driveTime": 4
+        },
+        {
+          "name": "Apple",
+          "recommender": "Andrew Barker",
+          "distance": 1.8,
+          "driveTime": 3
+        },
+        {
+          "name": "Kay Jewelers",
+          "recommender": "Andrew Barker",
+          "distance": 8,
+          "driveTime": 19
+        }
+      ]
+    },
+    {
+      "category": "Attractions",
+      "showDetails": false,
+      "places": [
+        {
+          "name": "Aquarium",
+          "recommender": "Andrew Barker",
+          "distance": 2.4,
+          "driveTime": 4
+        },
+        {
+          "name": "Zoo",
+          "recommender": "Andrew Barker",
+          "distance": 1.8,
+          "driveTime": 3
+        },
+        {
+          "name": "City Square",
+          "recommender": "Andrew Barker",
+          "distance": 8,
+          "driveTime": 19
+        }
+      ]
+    }
+  ]
 }

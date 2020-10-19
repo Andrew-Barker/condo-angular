@@ -20,6 +20,7 @@ import json from 'highlight.js/lib/languages/json';
 import scss from 'highlight.js/lib/languages/scss';
 import typescript from 'highlight.js/lib/languages/typescript';
 import { SplashScreenModule } from './_metronic/partials/layout/splash-screen/splash-screen.module';
+import { AgmCoreModule } from '@agm/core';
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -60,7 +61,10 @@ export function getHighlightLanguages() {
       : [],
     AppRoutingModule,
     InlineSVGModule.forRoot(),
-    NgbModule
+    NgbModule,
+    AgmCoreModule.forRoot({
+      apiKey: ''
+    })
   ],
   providers: [
     {

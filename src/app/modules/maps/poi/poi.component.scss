@@ -1,0 +1,14 @@
+agm-map {
+    min-height: 60vh;
+    height: 70vh;
+    max-height: 80vh;
+  }
+
+  .card.card-custom.card-stretch.gutter-b {
+    height: calc(100% - 5px);
+  }
+
+  .scrollable {
+    overflow-y: scroll;
+    height: 70vh;
+  }

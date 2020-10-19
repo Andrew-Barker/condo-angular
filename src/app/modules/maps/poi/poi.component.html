@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-lg-12 col-xxl-8 order-1 order-xxl-2" style="height: 100%;">
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="13">
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map>
+    </div>
+    <div class="col-lg-12 col-xxl-4 order-1 order-xxl-2 scrollable">
+        <div class="card card-custom card-stretch gutter-b" style="height: auto;" *ngFor="let category of pointsOfInterest">
+            <div class="card-header">
+                <div class="card-title">
+                  <h3 class="card-label cursor-pointer" (click)="category.showDetails = !category.showDetails"><i class="fas text-primary" [ngClass]="category.showDetails ? 'fa-chevron-down' : 'fa-chevron-right' "></i> {{category.category}}</h3>
+                </div>
+                <div class="card-toolbar">
+                  <div class="example-tools justify-content-center">
+                    <span class="example-toggle" ngbTooltip="View code"></span>
+                    <span class="example-copy" ngbTooltip="Copy code"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body" *ngIf="category.showDetails">
+                  <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let place of category?.places">
+                        <span class="float-right">
+                          <i class="fas fa-car text-primary"></i> {{place.driveTime}} mins <br><small><i class="fas fa-road fa-sm text-primary"></i> {{place.distance}} mi</small>
+                      </span><i class="fas fa-map-marker-alt text-primary"></i> {{place.name}}<br><small><i class="fas fa-user fa-sm text-primary"></i> {{place.recommender}}</small>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+          <div class="card card-custom card-stretch gutter-b" style="height: auto;" *ngIf="pointsOfInterest?.length == 0">
+            <div class="card-header">
+                <div class="card-title">
+                  <h3 class="card-label">No Points Of Interest</h3>
+                </div>
+                <div class="card-toolbar">
+                  <div class="example-tools justify-content-center">
+                    <span class="example-toggle" ngbTooltip="View code"></span>
+                    <span class="example-copy" ngbTooltip="Copy code"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                  Currently there are no points of interest saved to share with others. Please check back later or make a recommendation for others!
+              </div>
+          </div>
+    </div>
+</div>
