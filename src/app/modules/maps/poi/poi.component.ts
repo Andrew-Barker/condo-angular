@@ -1,5 +1,6 @@
 import { ChangeDetectorRef } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 import { MapsService } from '../maps.service';
 
 @Component({
@@ -51,6 +52,37 @@ export class PoiComponent implements OnInit {
     }, error => {
       console.error('error on get poi', error);
     })
+  };
+
+
+  async addPoi() {
+    
+    const { value: formValues } = await Swal.fire({
+      title: 'Add Place of Interest',
+      html:
+        `<form>
+        <label>Address:</label><input id="swal-input1" class="swal2-input">' 
+        <label>Category:</label><input id="swal-input2" class="swal2-input">
+        <label>Select:</label><select id="swalSelect" class="swal2-select swal2-input">
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="mercedes">Mercedes</option>
+        <option value="audi">Audi</option>
+        </select>
+        </form>`,
+      focusConfirm: false,
+      preConfirm: () => {
+        return [
+          document.getElementById('swal-input1').value,
+          document.getElementById('swal-input2').value
+        ]
+      }
+    })
+    
+    if (formValues) {
+      Swal.fire(JSON.stringify(formValues))
+    }
+    
   }
 
 }
